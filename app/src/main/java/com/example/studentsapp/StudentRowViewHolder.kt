@@ -10,12 +10,12 @@ class StudentRowViewHolder(
 ): RecyclerView.ViewHolder(binding.root) {
 
     fun bind(student: Student, position: Int) {
-        // 1. Update the UI
+        // 1. Update the UI text
         binding.nameTextView.text = student.name
         binding.idTextView.text = student.id
 
-        // 2. Set the Checkbox
-        // IMPORTANT: Reset the listener first to avoid bugs while scrolling (recycling)
+        // 2. Set the Checkbox state
+        // We reset the listener to null first to avoid triggering it while the ViewHolder is being recycled
         binding.checkbox.setOnCheckedChangeListener(null)
         binding.checkbox.isChecked = student.isPresent
 
@@ -24,8 +24,7 @@ class StudentRowViewHolder(
             student.isPresent = isChecked
         }
 
-        // 4. Handle Row Click (Open Activity)
-        // We set this here so we have access to the specific 'student' object
+        // 4. Handle Row Click (Callback to Activity/Fragment)
         itemView.setOnClickListener {
             listener?.onStudentItemClick(student)
         }
