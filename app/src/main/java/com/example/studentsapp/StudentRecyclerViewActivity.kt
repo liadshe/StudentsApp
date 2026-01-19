@@ -2,7 +2,6 @@ package com.example.studentsapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,7 +13,7 @@ import com.example.studentsapp.models.Student
 
 class StudentRecyclerViewActivity : AppCompatActivity() {
     var binding : ActivityStudentsRecyclerViewBinding? = null
-
+    private var adapter: StudentsAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,13 +28,13 @@ class StudentRecyclerViewActivity : AppCompatActivity() {
         binding?.recyclerView?.layoutManager = layout
         binding?.recyclerView?.setHasFixedSize(true)
 
-        val adapter = StudentsAdapter(Model.shared.students)
-        adapter.listener = object : onItemClickListener {
+        adapter = StudentsAdapter(Model.shared.students)
+        adapter?.listener = object : onItemClickListener {
             override fun onItemClick(position: Int) {
-                Log.d("StudentsRecyclerViewActivity", "Button clicked!")
             }
 
             override fun onStudentItemClick(student: Student) {
+
                 val intent =
                     Intent(this@StudentRecyclerViewActivity, StudentDetailsActivity::class.java)
 
@@ -46,4 +45,9 @@ class StudentRecyclerViewActivity : AppCompatActivity() {
         }
 
         binding?.recyclerView?.adapter = adapter
-    }}
+    }
+    override fun onResume() {
+        super.onResume()
+        adapter?.notifyDataSetChanged()
+    }
+}

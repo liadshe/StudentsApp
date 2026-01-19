@@ -3,8 +3,8 @@ package com.example.studentsapp.models
 import android.R
 
 data class Student(
-    val name: String?,
-    val id: String?,
+    var name: String?,
+    var id: String?,
     val pic: Int,
     var isPresent: Boolean,
     var phoneNumber:String?,
