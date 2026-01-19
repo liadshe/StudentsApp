@@ -9,14 +9,15 @@
     android:background="#F2F2F2"
     tools:context=".StudentRecyclerViewActivity">
 
-    <View
+    <ImageView
         android:id="@+id/header_view"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="#3F51B5"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/leopardprint"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/page_title"
@@ -48,14 +49,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
+        android:backgroundTint="#DC5782"
         android:clickable="true"
         android:focusable="true"
         android:src="@android:drawable/ic_input_add"
-        android:backgroundTint="#3F51B5"
-        app:tint="#FFFFFF"
         app:elevation="6dp"
-        app:pressedTranslationZ="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:pressedTranslationZ="12dp"
+        app:tint="#FFFFFF" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
