@@ -45,9 +45,15 @@ class StudentRecyclerViewActivity : AppCompatActivity() {
         }
 
         binding?.recyclerView?.adapter = adapter
+
+        binding?.addStudentFab?.setOnClickListener {
+            val intent = Intent(this, AddStudentActivity::class.java)
+            startActivity(intent)
+        }
     }
     override fun onResume() {
         super.onResume()
         adapter?.notifyDataSetChanged()
+        binding?.recyclerView?.adapter?.notifyDataSetChanged()
     }
 }
