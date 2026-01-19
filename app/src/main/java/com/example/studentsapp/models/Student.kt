@@ -5,5 +5,7 @@ import android.R
 data class Student(
     val name: String?,
     val id: String?,
-    val pic: Int?,
-    var isPresent: Boolean)
+    val pic: Int,
+    var isPresent: Boolean,
+    var phoneNumber:String?,
+    var address:String?)

@@ -12,7 +12,9 @@ class Model private constructor() {
                 name = "Student $i",
                 id = "ID${1000 + i}",
                 pic = R.drawable.avatar,
-                isPresent = false
+                isPresent = false,
+                phoneNumber = "053-5381648",
+                address = "ben gurion 100"
             )
             students.add(student)
         }
