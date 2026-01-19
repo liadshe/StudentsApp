@@ -1,9 +1,5 @@
 package com.example.studentsapp
 
-import android.widget.AdapterView
-import android.widget.CheckBox
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.studentsapp.databinding.StudentRowLayoutBinding
 import com.example.studentsapp.models.Student
@@ -13,31 +9,25 @@ class StudentRowViewHolder(
     private val listener: onItemClickListener?
 ): RecyclerView.ViewHolder(binding.root) {
 
-    private val student: Student? = null
-    init {
-        binding.checkbox.setOnClickListener { view ->
-            (view?.tag as? Int)?.let { tag ->
-                student?.isPresent = binding.checkbox.isChecked
-            }
-        }
-
-        itemView.setOnClickListener {
-            listener?.onItemClick(absoluteAdapterPosition)
-            student?.let { student ->
-                listener?.onStudentItemClick(student)
-            }
-        }
-
-    }
-
-
     fun bind(student: Student, position: Int) {
+        // 1. Update the UI
         binding.nameTextView.text = student.name
         binding.idTextView.text = student.id
-        binding.checkbox.apply {
-            isChecked = student.isPresent
-            tag = position
+
+        // 2. Set the Checkbox
+        // IMPORTANT: Reset the listener first to avoid bugs while scrolling (recycling)
+        binding.checkbox.setOnCheckedChangeListener(null)
+        binding.checkbox.isChecked = student.isPresent
+
+        // 3. Handle Checkbox Click (Update Model)
+        binding.checkbox.setOnCheckedChangeListener { _, isChecked ->
+            student.isPresent = isChecked
         }
 
+        // 4. Handle Row Click (Open Activity)
+        // We set this here so we have access to the specific 'student' object
+        itemView.setOnClickListener {
+            listener?.onStudentItemClick(student)
+        }
     }
 }

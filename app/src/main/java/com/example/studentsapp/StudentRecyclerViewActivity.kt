@@ -1,5 +1,6 @@
 package com.example.studentsapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -29,17 +30,20 @@ class StudentRecyclerViewActivity : AppCompatActivity() {
         binding?.recyclerView?.setHasFixedSize(true)
 
         val adapter = StudentsAdapter(Model.shared.students)
-        adapter.listener = object: onItemClickListener {
-            override fun onItemClick(position: Int)
-            {
+        adapter.listener = object : onItemClickListener {
+            override fun onItemClick(position: Int) {
                 Log.d("StudentsRecyclerViewActivity", "Button clicked!")
             }
 
             override fun onStudentItemClick(student: Student) {
-                Log.d("StudentsRecyclerViewActivity", "Student clicked!")
-            }
+                val intent =
+                    Intent(this@StudentRecyclerViewActivity, StudentDetailsActivity::class.java)
 
+                intent.putExtra("student_id", student.id)
+
+                startActivity(intent)
+            }
         }
+
         binding?.recyclerView?.adapter = adapter
-    }
-}
+    }}

@@ -34,13 +34,17 @@ class StudentsAdapter(
         )
 
     }
-
     override fun onBindViewHolder(
         holder: StudentRowViewHolder,
         position: Int
     ) {
+        val student = students[position]
 
-        holder.bind(students[position], position)
+        holder.bind(student, position)
+
+        holder.itemView.setOnClickListener {
+            listener?.onStudentItemClick(student)
+        }
     }
 }
 
